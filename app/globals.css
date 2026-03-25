@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+
+  --color-ivory: #FAF6F0;
+  --color-ivory-dark: #F0E6D8;
+  --color-ivory-darker: #E8D8C0;
+  --color-rose: #7C2D3E;
+  --color-rose-light: #A04560;
+  --color-rose-pale: #F5E0E6;
+  --color-rose-dark: #5A1F2D;
+  --color-gold: #C9A457;
+  --color-gold-light: #E0C882;
+  --color-gold-pale: #F8F0D8;
+  --color-gold-dark: #A8842E;
+  --color-ink: #1C1410;
+  --color-ink-mid: #5C4230;
+  --color-ink-warm: #8C7060;
+  --color-ink-light: #C0A890;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-inter);
+  }
+
+  ::selection {
+    background-color: var(--color-rose-pale);
+    color: var(--color-rose-dark);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-ivory-dark);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-light);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-warm);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-cormorant);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer animations {
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes scaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .shimmer-bg {
+    background: linear-gradient(
+      90deg,
+      var(--color-ivory-dark) 25%,
+      var(--color-ivory-darker) 50%,
+      var(--color-ivory-dark) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-rose text-ivory font-sans font-medium text-sm tracking-wide rounded-sm transition-all duration-200 hover:bg-rose-dark active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-gold text-ink font-sans font-medium text-sm tracking-wide rounded-sm transition-all duration-200 hover:bg-gold-dark active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-6 py-3 text-ink font-sans font-medium text-sm tracking-wide rounded-sm transition-all duration-200 hover:bg-ivory-dark active:scale-95;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-current font-sans font-medium text-sm tracking-wide rounded-sm transition-all duration-200 hover:bg-ink/5 active:scale-95;
+  }
+
+  .section-heading {
+    @apply font-serif text-4xl md:text-5xl font-medium text-ink;
+  }
+
+  .section-subheading {
+    @apply font-sans text-base text-ink-warm;
+  }
+
+  .gold-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:w-16 after:h-0.5 after:bg-gold;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-medium;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-white border border-ivory-darker rounded-sm font-sans text-sm text-ink placeholder:text-ink-light focus:outline-none focus:border-gold transition-colors duration-200;
+  }
+
+  .label-text {
+    @apply block font-sans text-xs font-medium text-ink-warm uppercase tracking-wider mb-1.5;
+  }
+}
